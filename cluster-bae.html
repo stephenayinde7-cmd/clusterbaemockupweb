@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cluster Bae — Cluster Lash Studio, Gbagada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF6F2; --cream-2:#F3E7E1; --paper:#FFFFFF;
+    --plum:#3A1F2B; --plum-soft:#6E4C56;
+    --rose:#C98A93; --rose-light:#EFD6D9; --mauve:#8B4B5C; --gold:#C6A46B;
+    --line:#E7D9D5;
+    --grad:conic-gradient(from 200deg,#F7A55E,#E85D8A,#8B5CF6,#F7A55E);
+    --radius:2px;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *,*::before,*::after{box-sizing:inherit;margin:0;padding:0;}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --cream:#FBF6F2; --paper:#FFFFFF; --plum:#3A1F2B; } }
+  html{scroll-behavior:smooth;scroll-padding-top:76px;}
+  body{
+    background:var(--cream); color:var(--plum);
+    font-family:'Work Sans',sans-serif; font-weight:400;
+    -webkit-font-smoothing:antialiased; line-height:1.6;
+    padding-bottom:64px;
+  }
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif; font-weight:500; line-height:1.1; letter-spacing:.2px;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px;}
+  a{color:inherit;text-decoration:none;}
+  img,svg{max-width:100%;display:block;}
+
+  /* header */
+  header{
+    position:sticky; top:0; z-index:50; background:rgba(251,246,242,.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line); padding-top:env(safe-area-inset-top,0px);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;max-width:1080px;margin:0 auto;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-ring{width:36px;height:36px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .logo-ring span{width:30px;height:30px;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--plum);}
+  .logo-word{font-family:'Cormorant Garamond',serif;font-size:21px;font-style:italic;color:var(--plum);line-height:1;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 24px;border-radius:var(--radius);font-size:15px;font-weight:500;
+    border:1px solid var(--plum); cursor:pointer; transition:opacity .15s ease;
+  }
+  .btn-primary{background:var(--plum);color:var(--cream);border-color:var(--plum);}
+  .btn-primary:hover{opacity:.85;}
+  .btn-outline{background:transparent;color:var(--plum);border-color:var(--plum);}
+  .btn-outline:hover{background:var(--plum);color:var(--cream);}
+  .btn-sm{padding:9px 18px;font-size:13.5px;}
+  .nav .btn{padding:10px 18px;font-size:13.5px;}
+
+  /* hero */
+  .hero{padding:56px 0 44px;}
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:34px;align-items:center;}
+  .eyebrow{color:var(--mauve);font-size:14px;letter-spacing:.03em;margin-bottom:14px;}
+  .hero h1{font-size:44px;max-width:11ch;}
+  .hero p{margin-top:18px;max-width:44ch;color:var(--plum-soft);font-size:16.5px;}
+  .hero-ctas{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;}
+  .lash-art{aspect-ratio:4/5;border-radius:6px;background:linear-gradient(160deg,var(--rose-light),var(--cream-2));display:flex;align-items:center;justify-content:center;border:1px solid var(--line);}
+
+  section{padding:58px 0;}
+  .section-head{max-width:52ch;margin-bottom:34px;}
+  .section-head .eyebrow{margin-bottom:8px;}
+  .section-head h2{font-size:32px;}
+  .section-head p{color:var(--plum-soft);margin-top:10px;font-size:15.5px;}
+
+  /* services */
+  .cards{display:grid;grid-template-columns:1fr;gap:16px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:24px;}
+  .card h3{font-size:22px;}
+  .card .price{font-family:'Work Sans';font-weight:600;font-size:18px;color:var(--mauve);margin-top:6px;}
+  .card .meta{font-size:13.5px;color:var(--plum-soft);margin-top:2px;}
+  .card p.desc{margin:12px 0 16px;font-size:14.5px;color:var(--plum-soft);}
+
+  /* booking */
+  .booking{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:26px 20px;}
+  .steps-track{display:flex;gap:6px;margin-bottom:26px;}
+  .steps-track span{flex:1;height:3px;background:var(--line);border-radius:2px;overflow:hidden;}
+  .steps-track span i{display:block;height:100%;width:0;background:var(--mauve);transition:width .3s ease;}
+  .step-label{font-size:13px;color:var(--mauve);margin-bottom:6px;}
+  .step-title{font-size:24px;margin-bottom:18px;}
+  .step-panel{display:none;}
+  .step-panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+  .opt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .opt{border:1px solid var(--line);border-radius:4px;padding:14px 12px;text-align:left;background:var(--cream);cursor:pointer;font-family:inherit;font-size:14px;color:var(--plum);}
+  .opt strong{display:block;font-size:15px;margin-bottom:2px;}
+  .opt small{color:var(--plum-soft);}
+  .opt.selected{border-color:var(--mauve);background:var(--rose-light);}
+  .opt:disabled{opacity:.35;cursor:not-allowed;}
+  .date-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch;}
+  .date-chip{flex:0 0 auto;min-width:64px;text-align:center;border:1px solid var(--line);border-radius:4px;padding:10px 8px;cursor:pointer;background:var(--cream);}
+  .date-chip .d{font-size:11px;color:var(--plum-soft);}
+  .date-chip .n{font-size:18px;font-family:'Cormorant Garamond';}
+  .date-chip.selected{border-color:var(--mauve);background:var(--rose-light);}
+  .time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .time-chip{border:1px solid var(--line);border-radius:4px;padding:10px 4px;text-align:center;font-size:13.5px;background:var(--cream);cursor:pointer;}
+  .time-chip.selected{border-color:var(--mauve);background:var(--rose-light);}
+  .time-chip:disabled{opacity:.3;text-decoration:line-through;cursor:not-allowed;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:13px;color:var(--plum-soft);margin-bottom:6px;}
+  .field input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:4px;font-family:inherit;font-size:15px;background:var(--cream);color:var(--plum);}
+  .field input:focus{outline:2px solid var(--mauve);outline-offset:1px;}
+  .step-nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px;}
+  .summary-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px;}
+  .summary-row:last-child{border-bottom:none;}
+  .confirm-box{text-align:center;padding:20px 6px;}
+  .confirm-box .mark{font-size:40px;font-family:'Cormorant Garamond';color:var(--mauve);margin-bottom:6px;}
+
+  /* gallery */
+  .gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .g-tile{aspect-ratio:1/1;border-radius:4px;background:linear-gradient(150deg,var(--rose-light),var(--cream-2));display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid var(--line);gap:8px;}
+  .g-tile span{font-size:12px;color:var(--plum-soft);letter-spacing:.02em;}
+
+  .about-grid{display:grid;grid-template-columns:1fr;gap:24px;align-items:center;}
+  .about-grid p{color:var(--plum-soft);margin-top:12px;font-size:15.5px;}
+
+  .training{background:var(--plum);color:var(--cream);border-radius:6px;padding:36px 26px;}
+  .training h2{color:var(--cream);}
+  .training p{color:#E3D3D8;margin-top:12px;max-width:48ch;}
+  .training .btn-outline{border-color:var(--cream);color:var(--cream);margin-top:20px;}
+  .training .btn-outline:hover{background:var(--cream);color:var(--plum);}
+
+  .contact-grid{display:grid;grid-template-columns:1fr;gap:20px;}
+  .contact-card{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:22px;}
+  .contact-card h3{font-size:19px;margin-bottom:8px;}
+  .contact-row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+
+  footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;font-size:13px;color:var(--plum-soft);}
+
+  .mobile-bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--paper);
+    border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
+  }
+  .mobile-bar .btn{width:100%;}
+
+  @media(min-width:760px){
+    .hero-grid{grid-template-columns:1.1fr .9fr;}
+    .hero h1{font-size:56px;}
+    .cards{grid-template-columns:repeat(2,1fr);}
+    .opt-grid{grid-template-columns:repeat(3,1fr);}
+    .time-grid{grid-template-columns:repeat(4,1fr);}
+    .gallery-grid{grid-template-columns:repeat(3,1fr);}
+    .about-grid{grid-template-columns:1fr 1fr;}
+    .contact-grid{grid-template-columns:1fr 1fr;}
+    body{padding-bottom:0;}
+    .mobile-bar{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo"><div class="logo-ring"><span>CB</span></div><div class="logo-word">Cluster Bae</div></div>
+    <a href="#booking" class="btn btn-primary">Book Now</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Cluster lash studio · Gbagada, Lagos</div>
+      <h1>Flawless Cluster Lashes, Made For You</h1>
+      <p>Cluster Bae helps women feel confident and put-together with beautifully placed cluster lashes — lightweight, natural-looking, and made to fit your eye shape.</p>
+      <div class="hero-ctas">
+        <a href="#booking" class="btn btn-primary">Book an Appointment</a>
+        <a href="#services" class="btn btn-outline">View Services</a>
+      </div>
+    </div>
+    <div class="lash-art" aria-hidden="true">
+      <svg width="150" height="90" viewBox="0 0 150 90" fill="none">
+        <path d="M10 60 C 40 20, 110 20, 140 60" stroke="#8B4B5C" stroke-width="2" fill="none"/>
+        <g stroke="#8B4B5C" stroke-width="2" stroke-linecap="round">
+          <path d="M28 52 L20 30"/><path d="M45 42 L40 18"/><path d="M63 37 L60 12"/>
+          <path d="M85 37 L88 12"/><path d="M104 42 L110 18"/><path d="M122 52 L131 30"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Services</div>
+      <h2>Cluster lash sets, priced simply</h2>
+      <p>Every set is applied by hand, lash by lash, for a full but natural finish.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3>Classic Cluster Set</h3>
+        <div class="price">₦12,000</div>
+        <div class="meta">45–60 minutes</div>
+        <p class="desc">A soft, everyday flutter that enhances your natural lash line.</p>
+        <a href="#booking" class="btn btn-outline btn-sm" onclick="preselectService('Classic Cluster Set')">Book Now</a>
+      </div>
+      <div class="card">
+        <h3>Volume Cluster Set</h3>
+        <div class="price">₦16,000</div>
+        <div class="meta">60–75 minutes</div>
+        <p class="desc">Fuller, denser clusters for a glam, standout look.</p>
+        <a href="#booking" class="btn btn-outline btn-sm" onclick="preselectService('Volume Cluster Set')">Book Now</a>
+      </div>
+      <div class="card">
+        <h3>Cluster Refill</h3>
+        <div class="price">₦7,000</div>
+        <div class="meta">30–40 minutes</div>
+        <p class="desc">Top up your existing set to keep it looking fresh.</p>
+        <a href="#booking" class="btn btn-outline btn-sm" onclick="preselectService('Cluster Refill')">Book Now</a>
+      </div>
+      <div class="card">
+        <h3>Bridal Cluster Lashes</h3>
+        <div class="price">₦20,000</div>
+        <div class="meta">75–90 minutes</div>
+        <p class="desc">A custom, camera-ready set for your big day.</p>
+        <a href="#booking" class="btn btn-outline btn-sm" onclick="preselectService('Bridal Cluster Lashes')">Book Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="booking" style="background:var(--cream-2);">
+  <div class="wrap" style="max-width:560px;">
+    <div class="section-head">
+      <div class="eyebrow">Book your appointment</div>
+      <h2>Reserve your spot</h2>
+      <p>Pick a service, date and time — takes less than a minute.</p>
+    </div>
+
+    <div class="booking">
+      <div class="steps-track">
+        <span><i id="tr1"></i></span><span><i id="tr2"></i></span><span><i id="tr3"></i></span><span><i id="tr4"></i></span>
+      </div>
+
+      <div class="step-panel active" data-step="1">
+        <div class="step-label">Step 1 of 4</div>
+        <div class="step-title">Choose a service</div>
+        <div class="opt-grid" id="serviceOpts"></div>
+        <div class="step-nav"><span></span><button class="btn btn-primary" id="next1" disabled>Continue</button></div>
+      </div>
+
+      <div class="step-panel" data-step="2">
+        <div class="step-label">Step 2 of 4</div>
+        <div class="step-title">Choose a date</div>
+        <div class="date-scroll" id="dateOpts"></div>
+        <div class="step-nav"><button class="btn btn-outline" onclick="goStep(1)">Back</button><button class="btn btn-primary" id="next2" disabled>Continue</button></div>
+      </div>
+
+      <div class="step-panel" data-step="3">
+        <div class="step-label">Step 3 of 4</div>
+        <div class="step-title">Choose a time</div>
+        <div class="time-grid" id="timeOpts"></div>
+        <div class="step-nav"><button class="btn btn-outline" onclick="goStep(2)">Back</button><button class="btn btn-primary" id="next3" disabled>Continue</button></div>
+      </div>
+
+      <div class="step-panel" data-step="4">
+        <div class="step-label">Step 4 of 4</div>
+        <div class="step-title">Your details</div>
+        <div class="field"><label for="fname">Full name</label><input id="fname" type="text" placeholder="e.g. Amaka Obi"></div>
+        <div class="field"><label for="fphone">Phone number</label><input id="fphone" type="tel" placeholder="080..."></div>
+        <div class="field"><label for="femail">Email</label><input id="femail" type="email" placeholder="you@email.com"></div>
+        <div class="step-nav"><button class="btn btn-outline" onclick="goStep(3)">Back</button><button class="btn btn-primary" id="reviewBtn">Review booking</button></div>
+      </div>
+
+      <div class="step-panel" data-step="5">
+        <div class="step-title">Confirm your appointment</div>
+        <div id="summaryBox"></div>
+        <div class="step-nav"><button class="btn btn-outline" onclick="goStep(4)">Edit</button><button class="btn btn-primary" id="confirmBtn">Confirm Appointment</button></div>
+      </div>
+
+      <div class="step-panel" data-step="6">
+        <div class="confirm-box">
+          <div class="mark">✓</div>
+          <h3 style="font-size:24px;">You're booked!</h3>
+          <p style="color:var(--plum-soft);margin-top:8px;font-size:14.5px;">A summary is below. Tap to send it to us on WhatsApp so we can lock in your slot.</p>
+          <div id="finalSummary" style="text-align:left;margin-top:16px;"></div>
+          <a id="waConfirm" class="btn btn-primary" style="width:100%;margin-top:18px;" target="_blank" rel="noopener">Send Confirmation via WhatsApp</a>
+          <button class="btn btn-outline" style="width:100%;margin-top:10px;" onclick="location.reload()">Book Another Appointment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Gallery</div>
+      <h2>Our recent work</h2>
+      <p>Add your favourite finished sets here so new clients can see your work.</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</section>
+
+<section id="about" style="background:var(--cream-2);">
+  <div class="wrap about-grid">
+    <div class="lash-art" aria-hidden="true" style="aspect-ratio:1/1;">
+      <svg width="110" height="70" viewBox="0 0 150 90" fill="none">
+        <path d="M10 60 C 40 20, 110 20, 140 60" stroke="#8B4B5C" stroke-width="2" fill="none"/>
+        <g stroke="#8B4B5C" stroke-width="2" stroke-linecap="round">
+          <path d="M28 52 L20 30"/><path d="M45 42 L40 18"/><path d="M63 37 L60 12"/>
+          <path d="M85 37 L88 12"/><path d="M104 42 L110 18"/><path d="M122 52 L131 30"/>
+        </g>
+      </svg>
+    </div>
+    <div>
+      <div class="eyebrow">About Cluster Bae</div>
+      <h2 style="font-size:30px;">Precision lashes, applied with care</h2>
+      <p>Cluster Bae is a Gbagada-based lash studio trusted by thousands online for precise, natural-looking cluster sets and hybrid lash mapping. Every set is customised to your eye shape, whether you wear your lashes soft and everyday or full glam.</p>
+      <p>Beyond appointments, Cluster Bae also trains lash techs and shares cluster application know-how — clean tools and an unhurried appointment, every time.</p>
+    </div>
+  </div>
+</section>
+
+<section id="training">
+  <div class="wrap">
+    <div class="training">
+      <div class="eyebrow" style="color:#D9AEB6;">Lash training</div>
+      <h2>Learn to do cluster lashes properly</h2>
+      <p>Cluster Bae also trains new and practising lash techs on cluster application — from lash mapping to long-lasting bonding technique, taught hands-on in Gbagada.</p>
+      <a href="#contact" class="btn btn-outline">Learn More / Book Training</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Location &amp; contact</div>
+      <h2>Find and reach us</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>Studio location</h3>
+        <p style="color:var(--plum-soft);font-size:14.5px;">Gbagada, Lagos, Nigeria.<br>Full address shared on booking confirmation.</p>
+      </div>
+      <div class="contact-card">
+        <h3>Message us directly</h3>
+        <div class="contact-row">
+          <a class="btn btn-primary btn-sm" href="https://wa.me/2340000000000" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-outline btn-sm" href="https://instagram.com/clusterbaeofficial" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="yr"></span> Cluster Bae · Gbagada, Lagos</footer>
+
+<div class="mobile-bar"><a href="#booking" class="btn btn-primary">Book an Appointment</a></div>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const services = [
+  {name:'Classic Cluster Set', price:'₦12,000', dur:'45–60 min'},
+  {name:'Volume Cluster Set', price:'₦16,000', dur:'60–75 min'},
+  {name:'Cluster Refill', price:'₦7,000', dur:'30–40 min'},
+  {name:'Bridal Cluster Lashes', price:'₦20,000', dur:'75–90 min'}
+];
+const state = {service:null, date:null, time:null};
+
+const serviceOpts = document.getElementById('serviceOpts');
+services.forEach(s=>{
+  const b = document.createElement('button');
+  b.className='opt'; b.type='button';
+  b.innerHTML = `<strong>${s.name}</strong><small>${s.price} · ${s.dur}</small>`;
+  b.onclick = ()=>{ state.service=s; renderSelected(serviceOpts,b); document.getElementById('next1').disabled=false; };
+  serviceOpts.appendChild(b);
+});
+
+function preselectService(name){
+  const s = services.find(x=>x.name===name);
+  if(!s) return;
+  state.service = s;
+  document.querySelectorAll('#serviceOpts .opt').forEach(el=>{
+    el.classList.toggle('selected', el.querySelector('strong').textContent===name);
+  });
+  document.getElementById('next1').disabled=false;
+}
+
+function renderSelected(container, el){
+  [...container.children].forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// Dates: next 14 days, skip Sundays
+const dateOpts = document.getElementById('dateOpts');
+const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const dates = [];
+let d = new Date();
+while(dates.length < 10){
+  d.setDate(d.getDate()+1);
+  if(d.getDay()!==0) dates.push(new Date(d));
+}
+dates.forEach(dt=>{
+  const b=document.createElement('button');
+  b.className='date-chip'; b.type='button';
+  b.innerHTML = `<div class="d">${dayNames[dt.getDay()]}</div><div class="n">${dt.getDate()}</div>`;
+  b.onclick = ()=>{ state.date=dt; renderSelected(dateOpts,b); buildTimes(dt); document.getElementById('next2').disabled=false; };
+  dateOpts.appendChild(b);
+});
+
+// Times: mock availability, deterministic per date
+const allTimes = ['9:00 AM','10:30 AM','12:00 PM','1:30 PM','3:00 PM','4:30 PM','6:00 PM'];
+const timeOpts = document.getElementById('timeOpts');
+function buildTimes(dt){
+  timeOpts.innerHTML='';
+  state.time=null;
+  document.getElementById('next3').disabled=true;
+  const seed = dt.getDate();
+  allTimes.forEach((t,i)=>{
+    const taken = (seed+i)%4===0;
+    const b=document.createElement('button');
+    b.className='time-chip'; b.type='button'; b.textContent=t;
+    if(taken){ b.disabled=true; }
+    else{ b.onclick=()=>{ state.time=t; renderSelected(timeOpts,b); document.getElementById('next3').disabled=false; }; }
+    timeOpts.appendChild(b);
+  });
+}
+
+function goStep(n){
+  document.querySelectorAll('.step-panel').forEach(p=>p.classList.toggle('active', p.dataset.step==n));
+  for(let i=1;i<=4;i++){
+    const bar = document.getElementById('tr'+i);
+    if(bar) bar.style.width = (n>i || (n===6&&i<=4)) ? '100%' : (n===i?'50%':'0%');
+  }
+  window.scrollTo({top:document.getElementById('booking').offsetTop-70,behavior:'smooth'});
+}
+document.getElementById('next1').onclick=()=>goStep(2);
+document.getElementById('next2').onclick=()=>goStep(3);
+document.getElementById('next3').onclick=()=>goStep(4);
+
+document.getElementById('reviewBtn').onclick=()=>{
+  const name=document.getElementById('fname').value.trim();
+  const phone=document.getElementById('fphone').value.trim();
+  const email=document.getElementById('femail').value.trim();
+  if(!name||!phone){ alert('Please enter your name and phone number.'); return; }
+  state.name=name; state.phone=phone; state.email=email;
+  document.getElementById('summaryBox').innerHTML = summaryHTML();
+  goStep(5);
+};
+
+function fmtDate(dt){ return dt.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'}); }
+function summaryHTML(){
+  return `
+    <div class="summary-row"><span>Service</span><strong>${state.service.name}</strong></div>
+    <div class="summary-row"><span>Price</span><strong>${state.service.price}</strong></div>
+    <div class="summary-row"><span>Date</span><strong>${fmtDate(state.date)}</strong></div>
+    <div class="summary-row"><span>Time</span><strong>${state.time}</strong></div>
+    <div class="summary-row"><span>Name</span><strong>${state.name}</strong></div>
+    <div class="summary-row"><span>Phone</span><strong>${state.phone}</strong></div>
+  `;
+}
+
+document.getElementById('confirmBtn').onclick=()=>{
+  document.getElementById('finalSummary').innerHTML = summaryHTML();
+  const msg = `Hi Cluster Bae! I'd like to confirm my booking:%0A${state.service.name} (${state.service.price})%0A${fmtDate(state.date)} at ${state.time}%0AName: ${state.name}%0APhone: ${state.phone}`;
+  document.getElementById('waConfirm').href = `https://wa.me/2340000000000?text=${msg}`;
+  goStep(6);
+};
+
+// Gallery placeholders — one style per tile, swap for real photos from @clusterbaeofficial
+const looks = [
+  {label:'Classic', n:3, spread:20},
+  {label:'Hybrid', n:5, spread:26},
+  {label:'Volume', n:7, spread:32},
+  {label:'Bridal', n:5, spread:22},
+  {label:'Natural', n:3, spread:16},
+  {label:'Glam', n:7, spread:34}
+];
+const galleryGrid = document.getElementById('galleryGrid');
+looks.forEach(l=>{
+  const t=document.createElement('div');
+  t.className='g-tile';
+  const lines = Array.from({length:l.n}).map((_,i)=>{
+    const x = 30 + i*((90)/(l.n-1||1));
+    const y1 = 55 - Math.sin((i/(l.n-1||1))*Math.PI)*l.spread*0.6;
+    const y2 = y1 - l.spread;
+    return `<path d="M${x} ${y1} L${x-3} ${y2}" stroke="#8B4B5C" stroke-width="2.5" stroke-linecap="round"/>`;
+  }).join('');
+  t.innerHTML = `<svg width="60" height="40" viewBox="0 0 150 90" fill="none"><path d="M15 58 C 50 25, 100 25, 135 58" stroke="#8B4B5C" stroke-width="2.5" fill="none"/>${lines}</svg><span>${l.label}</span>`;
+  galleryGrid.appendChild(t);
+});
+</script>
+</body>
+</html>
